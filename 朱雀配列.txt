@@ -47,7 +47,7 @@ wj	ぐ
 wh	げ
 wl	ご
 ek	ざ
-e;	し
+e;	
 ej	ず
 eh	ぜ
 el	ぞ
@@ -169,7 +169,7 @@ jw	ぐ
 hw	げ
 lw	ご
 ke	ざ
-;e	し
+;e	じ
 je	ず
 he	ぜ
 le	ぞ
