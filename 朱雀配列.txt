@@ -88,6 +88,7 @@ ro	ぢょ
 ei	じゃ
 eu	じゅ
 eo	じょ
+ey	じぇ
 wi	ぎゃ
 wu	ぎゅ
 wo	ぎょ
@@ -97,9 +98,11 @@ go	ひょ
 fi	ちゃ
 fu	ちゅ
 fo	ちょ
+fy	ちぇ
 di	しゃ
 du	しゅ
 do	しょ
+dy	しぇ
 si	きゃ
 su	きゅ
 so	きょ
@@ -240,6 +243,7 @@ or	ぢょ
 ie	じゃ
 ue	じゅ
 oe	じょ
+ye	じぇ
 iw	ぎゃ
 uw	ぎゅ
 ow	ぎょ
@@ -249,9 +253,11 @@ og	ひょ
 if	ちゃ
 uf	ちゅ
 of	ちょ
+yf	ちぇ
 id	しゃ
 ud	しゅ
 od	しょ
+yd	しぇ
 is	きゃ
 us	きゅ
 os	きょ
