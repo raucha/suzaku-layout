@@ -1,8 +1,19 @@
 # coding: utf-8
 
 import re
+import pykakasi
+# import cutlet
+import MeCab
 
 print('hello world')
+
+"""
+方針：
+句読点や数字で区切られた文章の範囲を１つの評価単位長さとする。
+各単位長さを表現するのにかかるコストを評価する。
+コストの算出は、２つのキーを億語に連打した時にかかる時間をベースにする。
+将来性につて確認
+"""
 
 pairs = [
     ["０", "0"],
@@ -37,3 +48,17 @@ for i, _ in enumerate(texts):
         texts[i] = texts[i].replace(p[0], p[1])
 texts = list(texts)
 print(texts[0:10])
+
+kks = pykakasi.kakasi()
+
+# texts[0]
+for item in kks.convert(texts[0]):
+    print("{}: kana '{}', hiragana '{}', romaji: '{}'".format(
+        item['orig'], item['kana'], item['hira'], item['hepburn']))
+    
+
+mecab = MeCab.Tagger("-Oyomi")
+print(mecab.parse(texts[0]))
+# katsu = cutlet.Cutlet()
+# print(katsu.romaji(texts[0]))
+
