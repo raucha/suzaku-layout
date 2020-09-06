@@ -28,3 +28,19 @@
 おい 1
 おう 1
 おえ 0
+
+---
+## 配置最適化
+
+### 環境構築
+```
+sudo pip3 install pipenv
+bash scripts/install_apt_pkg.sh
+```
+
+### スクリプト確認
+```
+cd scripts
+pipenv run python -m unittest discover tests
+pipenv run python layout_optimizer/layout_optimizer.py
+```
