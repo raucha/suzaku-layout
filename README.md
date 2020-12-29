@@ -18,7 +18,7 @@ pipenv run python layout_optimizer/layout_optimizer.py
 ```
 
 ### メモ
-#### よく使う並びが
+#### よく使う並びが1
 あい 1
 あう 1
 あえ 1
