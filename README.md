@@ -14,8 +14,10 @@ bash scripts/install_apt_pkg.sh
 ```
 cd scripts
 pipenv run python -m unittest discover tests
-pipenv run python layout_optimizer/layout_optimizer.py
+pipenv run python layout_optimizer/layout_optimizer.py   # データセットの文字を打ち込んだときの所要時間を算出
 ```
+
+
 
 ### メモ
 #### よく使う並びが1
