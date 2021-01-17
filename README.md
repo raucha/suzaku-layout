@@ -46,5 +46,4 @@ pipenv run python layout_optimizer/layout_optimizer.py   # データセットの
 おう 1
 おえ 0
 
-
-
+えおうあい

@@ -9,6 +9,9 @@ from jaconv import kata2hira
 import pandas as pd
 import codecs
 import mojimoji
+import random
+import itertools
+
 
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
@@ -33,7 +36,21 @@ ToDo:
 カタカナ→キーストロークへの変換テーブル
 """
 
-
+boin = {
+        "a": "l",
+        "ya": "o",
+        "u": "k",
+        "yu": "i",
+        "o": "j",
+        "yo": "u",
+        "i": ";",
+        "e": "h",
+        "xa": "",
+        "xi": "",
+        "xu": "",
+        "xe": "",
+        "xo": "",
+    }
 def char2stroke(char):
     """入力文字を押下するキーに変換
 
@@ -43,38 +60,38 @@ def char2stroke(char):
     Returns:
         str: 押下するキー列
     """
-    boin = {
-        "a": "l",
-        "i": ";",
-        "u": "j",
-        "e": "h",
-        "o": "k",
-        "ya": "o",
-        "yu": "u",
-        "yo": "i",
-        "xa": "",
-        "xi": "",
-        "xu": "",
-        "xe": "",
-        "xo": "",
-    }
+    # boin = {
+    #     "a": "l",
+    #     "ya": "o",
+    #     "u": "j",
+    #     "yu": "u",
+    #     "o": "k",
+    #     "yo": "i",
+    #     "i": ";",
+    #     "e": "h",
+    #     "xa": "",
+    #     "xi": "",
+    #     "xu": "",
+    #     "xe": "",
+    #     "xo": "",
+    # }
 
     shiin = {
         "a": "a",
-        "k": "s",
-        "s": "d",
-        "t": "f",
-        "n": "c",
+        "k": "d",
+        "g": "c",
+        "s": "f",
+        "z": "v",
+        "t": "s",
+        "d": "x",
         "h": "g",
-        "m": "v",
-        "y": "",
+        "b": "b",
+        "p": "t",
+        "n": "e",
+        "m": "r",
+        "y": "q",
         "r": "z",
-        "w": "",
-        "g": "w",
-        "z": "e",
-        "d": "r",
-        "b": "t",
-        "p": "b",
+        "w": "w",
     }
 
     kana2key = {
@@ -113,9 +130,9 @@ def char2stroke(char):
         "む": shiin["m"] + boin["u"],
         "め": shiin["m"] + boin["e"],
         "も": shiin["m"] + boin["o"],
-        "や": shiin["y"] + boin["a"],
-        "ゆ": shiin["y"] + boin["u"],
-        "よ": shiin["y"] + boin["o"],
+        "や": shiin["y"] + boin["ya"],
+        "ゆ": shiin["y"] + boin["yu"],
+        "よ": shiin["y"] + boin["yo"],
         "ら": shiin["r"] + boin["a"],
         "り": shiin["r"] + boin["i"],
         "る": shiin["r"] + boin["u"],
@@ -332,6 +349,7 @@ def text2keystrokes(text):
     return strks_all
 
 
+bn = {"L": 0, "R": 0}
 def text2score(text):
     """日本語文字列から所要時間を算出
 
@@ -345,6 +363,11 @@ def text2score(text):
     st_l, st_r = devide_strokes_side(st)
     score_l = keystrokes2score(st_l)
     score_r = keystrokes2score(st_r)
+    global bn
+    if score_l > score_r:
+        bn["L"] += 1
+    else:
+        bn["R"] += 1
     return max(score_l, score_r)
 
 
@@ -467,12 +490,44 @@ def regularize_text(text):
 
 
 if __name__ == "__main__":
+    # global boin
+    
+    ## 初期設定キー配置での動作確認
     t = load_dataset()
+    random.seed(2)
+    t = random.sample(t, int(len(t)/10))
     score = 0.0
     for n in t:
         # print("          {}".format(n))
         cs = text2score(n)
         score += cs
-        print("{:.2f}  {}".format(cs, n))
+        # print("{:.2f}  {}".format(cs, n))
     print("total core: {}".format(score))
+    print("LR bottle neck: {}".format(bn))
+
+    ## 右手側のキー配置を全探索。3C3 x 2C2 = 12通り。
+    testcase_auo = [("a", "ya"), ("u", "yu"), ("o", "yo")]
+    testcase_auo = list(itertools.permutations(testcase_auo))
+    testcase_ie = ["i", "e"]
+    testcase_ie = list(itertools.permutations(testcase_ie))
+    testcase = list(itertools.product(testcase_auo, testcase_ie))
+    print(testcase)
+    for ccase in testcase: 
+        print(ccase)
+        boin[ccase[0][0][0]] = "j"
+        boin[ccase[0][0][1]] = "u"
+        boin[ccase[0][1][0]] = "k"
+        boin[ccase[0][1][1]] = "i"
+        boin[ccase[0][2][0]] = "l"
+        boin[ccase[0][2][1]] = "o"
+        boin[ccase[1][0]] = "h"
+        boin[ccase[1][1]] = ";"
+        score = 0.0
+        for n in t:
+            # print("          {}".format(n))
+            cs = text2score(n)
+            score += cs
+            # print("{:.2f}  {}".format(cs, n))
+        print("total core: {}".format(score))
+        print("LR bottle neck: {}".format(bn))
     # print(load_dataset()[:10])
