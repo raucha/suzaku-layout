@@ -1,4 +1,7 @@
 {
-    "python.pythonPath": "/home/akio/.local/share/virtualenvs/suzaku-layout-VQwUqJur/bin/python",
-    "python.formatting.provider": "black"
+    "python.pythonPath": "/home/akio/.local/share/virtualenvs/scripts-aTmxi7PC/bin/python",
+    "python.formatting.provider": "black",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true
 }
