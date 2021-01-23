@@ -14,6 +14,6 @@ df = df.drop(columns=["in_0", "in_1"])
 df_norev = pd.read_table("./table_noreverse.tsv", encoding="shift-jis")
 df = pd.concat([df, df_norev]).reset_index(drop=True)[["in", "out"]]
 
-df.to_csv("../朱雀配列.tsv", sep="\t", index=None, header=None, encoding="shift-jis")
+df.to_csv("../朱雀配列.tsv", sep="\t", index=None, header=None, encoding="utf-8")
 
 print(df)
